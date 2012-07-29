@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Friendly name:</b>
+  <%= @coupon_type.friendly_name %>
+</p>
+
+<p>
+  <b>Partner name:</b>
+  <%= @coupon_type.partner_name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @coupon_type.description %>
+</p>
+
+<p>
+  <b>Discount percentage:</b>
+  <%= @coupon_type.discount_percentage %>
+</p>
+
+<p>
+  <b>Expiration date:</b>
+  <%= @coupon_type.expiration_date %>
+</p>
+
+<p>
+  <b>Available coupons:</b>
+  <%= @coupon_type.available_coupons %>
+</p>
+
+
+<%= link_to 'Edit', edit_coupon_type_path(@coupon_type) %> |
+<%= link_to 'Back', coupon_types_path %>

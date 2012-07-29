@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Coupon type:</b>
+  <%= @coupon.coupon_type_id %>
+</p>
+
+<p>
+  <b>Client user:</b>
+  <%= @coupon.client_user %>
+</p>
+
+<p>
+  <b>Client comment:</b>
+  <%= @coupon.client_comment %>
+</p>
+
+<p>
+  <b>Created at:</b>
+  <%= @coupon.created_at %>
+</p>
+
+<p>
+  <b>Used date:</b>
+  <%= @coupon.used_date %>
+</p>
+
+<p>
+  <b>Consuming partner:</b>
+  <%= @coupon.consuming_partner %>
+</p>
+
+
+<%= link_to 'Back', coupons_path %>

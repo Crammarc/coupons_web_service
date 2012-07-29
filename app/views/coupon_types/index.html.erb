@@ -1,0 +1,35 @@
+<h1>Manage Coupon Types</h1>
+
+<table>
+  <tr>
+	<th>Coupon type ID</th>
+    <th>Friendly name</th>
+    <th>Partner name</th>
+    <th>Description</th>
+    <th>Discount percentage</th>
+    <th>Expiration date</th>
+    <th>Available coupons</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @coupon_types.each do |coupon_type| %>
+  <tr>
+	<td><%= coupon_type.id %></td>
+    <td><%= coupon_type.friendly_name %></td>
+    <td><%= coupon_type.partner_name %></td>
+    <td><%= coupon_type.description %></td>
+    <td><%= coupon_type.discount_percentage %></td>
+    <td><%= coupon_type.expiration_date %></td>
+    <td><%= coupon_type.available_coupons %></td>
+    <td><%= link_to 'Show', coupon_type %></td>
+    <td><%= link_to 'Edit', edit_coupon_type_path(coupon_type) %></td>
+    <td><%= link_to 'Destroy', coupon_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'Create Coupon Type', new_coupon_type_path %>
