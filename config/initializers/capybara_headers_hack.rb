@@ -1,3 +1,5 @@
+require 'capybara/rails'
+
 module RackTestMixin
 
   def self.included(mod)
