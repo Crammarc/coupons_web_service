@@ -20,6 +20,5 @@ module RackTestMixin
 
 end
 
-Capybara::Driver::RackTest.send :include, RackTestMixin
-
+#Capybara::Driver::RackTest.send :include, RackTestMixin
 

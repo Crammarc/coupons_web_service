@@ -3,5 +3,6 @@
 
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
+require 'rack-test'
 
 Lelylan::Application.load_tasks
