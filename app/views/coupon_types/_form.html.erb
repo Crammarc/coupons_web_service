@@ -1,0 +1,41 @@
+<%= form_for(@coupon_type) do |f| %>
+  <% if @coupon_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@coupon_type.errors.count, "error") %> prohibited this coupon_type from being saved:</h2>
+
+      <ul>
+      <% @coupon_type.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :friendly_name %><br />
+    <%= f.text_field :friendly_name %>
+  </div>
+  <div class="field">
+    <%= f.label :partner_name %><br />
+    <%= f.text_field :partner_name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_percentage %><br />
+    <%= f.text_field :discount_percentage %>
+  </div>
+  <div class="field">
+    <%= f.label :expiration_date %><br />
+    <%= f.datetime_select :expiration_date %>
+  </div>
+  <div class="field">
+    <%= f.label :available_coupons %><br />
+    <%= f.text_field :available_coupons %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
