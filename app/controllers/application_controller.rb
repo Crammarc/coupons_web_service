@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   
   include Lelylan::Rescue::Helpers
 
-  #protect_from_forgery
+  protect_from_forgery
   
   before_filter :authenticate
   helper_method :current_user
@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
     def authenticate
       if api_request
-        oauth_authorized   # uncomment to make all json API protected
+        #oauth_authorized   # uncomment to make all json API protected
       else
         session_auth
       end
