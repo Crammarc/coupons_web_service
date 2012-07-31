@@ -24,8 +24,12 @@ class CouponTypesController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      #format.json { render json: @coupon_type }
-	  format.json { render :json => @coupon_type.to_a.to_json }
+	  if @coupon_type
+		#format.json { render json: @coupon_type }
+		format.json { render :json => @coupon_type.to_a.to_json }
+	  else
+		format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604}
+	  end
     end
   end
 

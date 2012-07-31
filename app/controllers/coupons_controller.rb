@@ -6,8 +6,12 @@ class CouponsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      #format.xml  { render :xml => @coupons }
-	  format.json { render :json => @coupons.to_a.to_json }
+	  if @coupons
+		#format.xml  { render :xml => @coupons }
+		format.json { render :json => @coupons.to_a.to_json }
+	  else
+	    format.json { render :json => "No Coupons Have Been Created Yet.\n", status: 706}
+	  end
     end
   end
 
@@ -18,8 +22,12 @@ class CouponsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      #format.xml  { render :xml => @coupon }
-	  format.json { render :json => @coupon.to_a.to_json }
+	  if @coupon
+		#format.xml  { render :xml => @coupon }
+		format.json { render :json => @coupon.to_a.to_json }
+	  else
+		format.json { render :json => "The Requested Coupon Does Not Exist.\n", status: 707}
+	  end
     end
   end
 
