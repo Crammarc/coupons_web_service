@@ -8,8 +8,12 @@ class CouponTypesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-	  #format.json { render json: @coupon_types }
-      format.json { render :json => @coupon_types.to_a.to_json }
+	  if !@coupon_types == nil
+		#format.json { render json: @coupon_types }
+		format.json { render :json => @coupon_types.to_a.to_json }
+	  else
+		format.json { render :json => "No Coupon Types Have Been Created Yet.\n", status: 603}
+	  end
     end
   end
 
