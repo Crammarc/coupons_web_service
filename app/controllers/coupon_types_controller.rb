@@ -8,7 +8,7 @@ class CouponTypesController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-	  if !@coupon_types == nil
+	  if @coupon_types
 		#format.json { render json: @coupon_types }
 		format.json { render :json => @coupon_types.to_a.to_json }
 	  else
