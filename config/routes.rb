@@ -22,7 +22,7 @@ Lelylan::Application.routes.draw do
   get "users/show" => "users#show"
   get "users/edit" => "users#edit"
   
-  get "coupon_types/not_found" => "coupon_types#not_found"
+  get "not_found" => "coupon_types#not_found"
 
   resources :users
   resources :sessions
