@@ -106,13 +106,19 @@ class CouponTypesController < ApplicationController
   # DELETE /coupon_types/1
   # DELETE /coupon_types/1.json
   def destroy
-    @coupon_type = CouponType.find(params[:id])
-    @coupon_type.destroy
-
-    respond_to do |format|
-      format.html { redirect_to coupon_types_url }
-      #format.json { head :no_content }
-	  format.json { render :json => "Coupon Type Successfully Deleted.\n", status: 600 }
-    end
+  
+	begin
+		@coupon_type = CouponType.find(params[:id])
+	rescue Mongoid::Errors::DocumentNotFound
+		return
+	else
+		@coupon_type.destroy
+		
+		respond_to do |format|
+		  format.html { redirect_to coupon_types_url }
+		  #format.json { head :no_content }
+		  format.json { render :json => "Coupon Type Successfully Deleted.\n", status: 600 }
+		end
+	end
   end
 end
