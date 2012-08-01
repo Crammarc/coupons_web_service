@@ -25,7 +25,7 @@ class CouponTypesController < ApplicationController
 	rescue Mongoid::Errors::DocumentNotFound
 		respond_to do |format|
 			#render text: "The Requested Coupon Type Does Not Exist.\n", status: 604
-			p @coupon_type
+			p @coupon_type.to_a.to_json
 			format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604 }
 		end
 	else
