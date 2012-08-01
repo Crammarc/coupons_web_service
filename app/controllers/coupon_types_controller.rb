@@ -22,7 +22,8 @@ class CouponTypesController < ApplicationController
 	#begin
 		@coupon_type = CouponType.find(params[:id])
 		
-	#rescue Mongoid::Errors::DocumentNotFound
+	rescue Mongoid::Errors::DocumentNotFound => e
+		p e.message + "\n\n\n\n"
 	if !@coupon_type
 		respond_to do |format|
 			#render text: "The Requested Coupon Type Does Not Exist.\n", status: 604
