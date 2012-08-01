@@ -28,6 +28,7 @@ class CouponTypesController < ApplicationController
 			#render text: "The Requested Coupon Type Does Not Exist.\n", status: 604
 			format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604 }
 		end
+		return
 	else
 		respond_to do |format|
 			format.html # show.html.erb
