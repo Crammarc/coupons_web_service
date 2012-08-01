@@ -19,16 +19,18 @@ class CouponTypesController < ApplicationController
   # GET /coupon_types/1
   # GET /coupon_types/1.json
   def show
-    @coupon_type = CouponType.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-	  if @coupon_type
+	begin
+		@coupon_type = CouponType.find(params[:id])
+		
+	rescue Mongoid::Errors::DocumentNotFound
+		format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604}
+		return
+	end
+	
+	respond_to do |format|
+		format.html # show.html.erb
 		#format.json { render json: @coupon_type }
 		format.json { render :json => @coupon_type.to_a.to_json }
-	  else
-		format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604}
-	  end
     end
   end
 
