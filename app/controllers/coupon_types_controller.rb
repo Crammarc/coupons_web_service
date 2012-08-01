@@ -3,16 +3,21 @@ class CouponTypesController < ApplicationController
   # GET /coupon_types
   # GET /coupon_types.json
   def index
-    @coupon_types = CouponType.all
+  
+	begin
+		@coupon_types = CouponType.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-	  if @coupon_types
-		#format.json { render json: @coupon_types }
-		format.json { render :json => @coupon_types.to_a.to_json }
-	  else
-		format.json { render :json => "No Coupon Types Have Been Created Yet.\n", status: 603}
-	  end
+	rescue Mongoid::Errors::DocumentNotFound
+		respond_to do |format|
+			#format.json { render :json => "No Coupon Types Have Been Created Yet.\n", status: 603}
+			return
+		end
+	else
+		respond_to do |format|
+			format.html # index.html.erb
+			#format.json { render json: @coupon_types }
+			format.json { render :json => @coupon_types.to_a.to_json }
+		end
     end
   end
 
@@ -68,7 +73,7 @@ class CouponTypesController < ApplicationController
       else
         format.html { render action: "new" }
 		#format.json { render json: @coupon_type.errors, status: :unprocessable_entity }
-        format.json { render :json => "Coupon Type Not Created.\n" + @coupon_type.to_a.to_json.errors, status: 601 }
+        format.json { render :json => "Coupon Type Not Created.\n", status: 601 }
       end
     end
   end
@@ -86,7 +91,7 @@ class CouponTypesController < ApplicationController
       else
         format.html { render action: "edit" }
         #format.json { render json: @coupon_type.errors, status: :unprocessable_entity }
-		format.json { render :json => "Coupon Type Not Updated.\n" + @coupon_type.to_a.to_json.errors, status: 602 }
+		format.json { render :json => "Coupon Type Not Updated.\n", status: 602 }
       end
     end
   end
