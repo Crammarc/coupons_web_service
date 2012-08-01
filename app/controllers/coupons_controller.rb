@@ -81,11 +81,11 @@ class CouponsController < ApplicationController
       if @coupon.save
         format.html { redirect_to @coupon, notice: 'Coupon Successfully Generated.' }
         #format.json { render json: @coupon.to_a.to_json, status: :created, location: @coupon.to_a.to_json }
-		format.json { render :json => "Coupon Successfully Generated.\n" + @coupon.to_a.to_json, status: 700, location: @coupon }
+		format.json { render :json => "Coupon Successfully Generated.\n" + @coupon.to_a.to_json, :status => 700, location: @coupon }
       else
         format.html { render action: "new" }
         #format.json { render json: @coupon.to_a.to_json.errors, status: :unprocessable_entity }
-		format.json { render :json => "Coupon Not Generated.\n" + @coupon.to_a.to_json.errors, status: 703}
+		format.json { render :json => "Coupon Not Generated.\n", status: 703}
       end
     end
   end
