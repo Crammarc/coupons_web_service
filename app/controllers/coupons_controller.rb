@@ -1,4 +1,5 @@
 class CouponsController < ApplicationController
+  before_filter :oauth_authorized
   # GET /coupons
   # GET /coupons.xml
   def index

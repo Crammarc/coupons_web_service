@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base 
-  #skip_before_filter :verify_authenticity_token
-  
+
   include Lelylan::Rescue::Helpers
 
   protect_from_forgery
@@ -49,15 +48,13 @@ class ApplicationController < ActionController::Base
     end
 
     def oauth_authorized
-	p "CHECKING AUTH"
       action = params[:controller] + "/" + params[:action]
       normalize_token
       @token = OauthToken.where(token: params[:token]).all_in(scope: [action]).first
       if @token.nil? or @token.blocked?
         render text: "Unauthorized access.", status: 401
         return false
-      else 
-	    p "AUTHED!" 	
+      else 	
         access = OauthAccess.where(client_uri: @token.client_uri , resource_owner_uri: @token.resource_owner_uri).first
         access.accessed!
       end

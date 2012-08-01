@@ -1,5 +1,4 @@
 class CouponTypesController < ApplicationController
-  #skip_before_filter :verify_authenticity_token
   before_filter :oauth_authorized
   # GET /coupon_types
   # GET /coupon_types.json
