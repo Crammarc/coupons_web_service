@@ -77,7 +77,8 @@ class ApplicationController < ActionController::Base
     end
 	
 	def not_found
-		raise ActionController::RoutingError.new('Not Found')
+		#raise ActionController::RoutingError.new('Not Found')
+		format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604 }
 	end
 
 
