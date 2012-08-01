@@ -81,19 +81,26 @@ class CouponTypesController < ApplicationController
   # PUT /coupon_types/1
   # PUT /coupon_types/1.json
   def update
-    @coupon_type = CouponType.find(params[:id])
+  
+	begin
+		@coupon_type = CouponType.find(params[:id])
 
-    respond_to do |format|
-      if @coupon_type.update_attributes(params[:coupon_type])
-        format.html { redirect_to @coupon_type, notice: 'Coupon Type Successfully Updated.' }
-        #format.json { head :no_content }
-		format.json { render :json => "Coupon Type Successfully Updated.\n" + @coupon_type.to_a.to_json, status: 600, location: @coupon_type }
-      else
-        format.html { render action: "edit" }
-        #format.json { render json: @coupon_type.errors, status: :unprocessable_entity }
-		format.json { render :json => "Coupon Type Not Updated.\n", status: 602 }
-      end
-    end
+	rescue Mongoid::Errors::DocumentNotFound
+		return
+	else	
+		respond_to do |format|
+			if @coupon_type.update_attributes(params[:coupon_type])
+				format.html { redirect_to @coupon_type, notice: 'Coupon Type Successfully Updated.' }
+				#format.json { head :no_content }
+				format.json { render :json => "Coupon Type Successfully Updated.\n" + @coupon_type.to_a.to_json, status: 600, location: @coupon_type }
+			else
+				format.html { render action: "edit" }
+				#format.json { render json: @coupon_type.errors, status: :unprocessable_entity }
+				format.json { render :json => "Coupon Type Not Updated.\n", status: 602 }
+			end
+		end
+	end
+	
   end
 
   # DELETE /coupon_types/1
