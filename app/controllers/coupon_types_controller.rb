@@ -26,7 +26,7 @@ class CouponTypesController < ApplicationController
 		p e.message + "\n\n\n\n"
 		respond_to do |format|
 			#render text: "The Requested Coupon Type Does Not Exist.\n", status: 604
-			format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", :status => 604 }
+			format.json { render :text => "The Requested Coupon Type Does Not Exist.\n", status: 604 }
 			return
 		end
 	else
