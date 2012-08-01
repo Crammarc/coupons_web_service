@@ -17,7 +17,9 @@ class CouponTypesController < ApplicationController
   end
   
   def not_found
-	render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604
+	respond_to do |format|
+		format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604 }
+	end
   end
 
   # GET /coupon_types/1
@@ -33,7 +35,6 @@ class CouponTypesController < ApplicationController
 			#format.json { render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604 }
 			redirect_to :action => 'not_found'
 		end
-		return
 	else
 		respond_to do |format|
 			format.html # show.html.erb
