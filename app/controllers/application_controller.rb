@@ -20,8 +20,8 @@ class ApplicationController < ActionController::Base
     end
 
     def authenticate
-      if api_request
-        #oauth_authorized   # uncomment to make all json API protected
+	  if api_request
+        oauth_authorized   # uncomment to make all json API protected
       else
         session_auth
       end
@@ -49,6 +49,7 @@ class ApplicationController < ActionController::Base
     end
 
     def oauth_authorized
+	p "CHECKING AUTH"
       action = params[:controller] + "/" + params[:action]
       normalize_token
       @token = OauthToken.where(token: params[:token]).all_in(scope: [action]).first
@@ -56,6 +57,7 @@ class ApplicationController < ActionController::Base
         render text: "Unauthorized access.", status: 401
         return false
       else 
+	    p "AUTHED!" 	
         access = OauthAccess.where(client_uri: @token.client_uri , resource_owner_uri: @token.resource_owner_uri).first
         access.accessed!
       end
@@ -63,10 +65,11 @@ class ApplicationController < ActionController::Base
 
     def normalize_token
       # Token in the body
-      if (json_body and @body[:token])
-        params[:token] = @body[:token]
-      end
-      # Token in the header
+      # if (json_body and @body[:token])
+      #   params[:token] = @body[:token]
+      # end
+      
+	  # Token in the header
       if request.env["Authorization"]
         params[:token] = request.env["Authorization"].split(" ").last
       end
