@@ -75,11 +75,5 @@ class ApplicationController < ActionController::Base
     def admin_does_not_exist
       User.where(admin: true).first.nil?
     end
-	
-	def not_found
-		#raise ActionController::RoutingError.new('Not Found')
-		render :json => "The Requested Coupon Type Does Not Exist.\n", status: 604
-	end
-
 
 end
