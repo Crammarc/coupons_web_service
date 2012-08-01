@@ -21,6 +21,8 @@ Lelylan::Application.routes.draw do
   get "sign_up" => "users#new",        as: "sign_up"
   get "users/show" => "users#show"
   get "users/edit" => "users#edit"
+  
+  get "not_found" => "coupon_types#not_found"
 
   resources :users
   resources :sessions
