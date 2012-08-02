@@ -80,8 +80,12 @@ class CouponsController < ApplicationController
 	@coupon.update_attributes(:created_at => Time.now);
 	@coupon.update_attributes(:used_date => nil);
 	
+	@available_coupons = @coupon_type.available_coupons
+	
     respond_to do |format|
       if @coupon.save
+		@coupon_type.update_attributes(:available_coupons => @available_coupons - 1);
+		
         format.html { redirect_to @coupon, notice: 'Coupon Successfully Generated.' }
         #format.json { render json: @coupon.to_a.to_json, status: :created, location: @coupon.to_a.to_json }
 		format.json { render :json => "Coupon Successfully Generated.\n" + @coupon.to_a.to_json, :status => 700, location: @coupon }
