@@ -129,7 +129,7 @@ class CouponsController < ApplicationController
 		
 		#Case 2: The Requested Is Not Valid
 		if @coupon.used_date != nil
-			flash[:notice] = 'The Requested Coupon Is Not Valid'
+			#flash[:notice] = 'The Requested Coupon Is Not Valid'
 			#render action: "new"
 			render text: "The Requested Coupon Is Not Valid.", status: 705
 			return
@@ -147,7 +147,7 @@ class CouponsController < ApplicationController
 		  else
 			format.html { render :action => "edit" }
 			#format.xml  { render :xml => @coupon.errors, :status => :unprocessable_entity }
-			format.json { render :json => "Coupon Not Updated.\n" + @coupon.to_a.to_json.errors, status: 706}
+			format.json { render :json => "Coupon Not Updated.\n" + @coupon.errors.to_a.to_json, status: 706}
 		  end
 		end
 	end
