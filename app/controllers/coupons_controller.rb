@@ -77,13 +77,21 @@ class CouponsController < ApplicationController
 			return
 		end
 		
+		# Are there any available coupons of this type to be generated?
+		@available_coupons = @coupon_type.available_coupons
+		
+		if @available_coupons <= 0
+			render text: "The Requested Coupon Type Is Not Available Anymore.", status: 708
+			return
+		end
+		
 		@coupon.update_attributes(:created_at => Time.now);
 		@coupon.update_attributes(:used_date => nil);
 		
-		@available_coupons = @coupon_type.available_coupons
-		
 		respond_to do |format|
+		  # Generate the coupon
 		  if @coupon.save
+			# Decrement the number of available coupons by 1
 			@coupon_type.update_attributes(:available_coupons => @available_coupons - 1);
 			
 			format.html { redirect_to @coupon, notice: 'Coupon Successfully Generated.' }
