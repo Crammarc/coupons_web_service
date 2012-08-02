@@ -63,38 +63,40 @@ class CouponsController < ApplicationController
 		@coupon_type = CouponType.find(params[:coupon][:coupon_type_id])
 		
 	rescue Mongoid::Errors::DocumentNotFound
-		flash[:notice] = 'The Requested Coupon Type Does Not Exist'
+		#flash[:notice] = 'The Requested Coupon Type Does Not Exist'
 		#render action: "new"
 		render text: "The Requested Coupon Type Does Not Exist.", status: 701
 		return
-	end
+	else
 	
-	#Case 2: The Requested Coupon Has Expired
-	if @coupon_type.expiration_date < Time.now
-		flash[:notice] = 'The Requested Coupon Has Expired'
-		#render action: "new"
-		render text: "The Requested Coupon Has Expired.", status: 702
-		return
-	end
-	
-	@coupon.update_attributes(:created_at => Time.now);
-	@coupon.update_attributes(:used_date => nil);
-	
-	@available_coupons = @coupon_type.available_coupons
-	
-    respond_to do |format|
-      if @coupon.save
-		@coupon_type.update_attributes(:available_coupons => @available_coupons - 1);
+		#Case 2: The Requested Coupon Has Expired
+		if @coupon_type.expiration_date < Time.now
+			#flash[:notice] = 'The Requested Coupon Has Expired'
+			#render action: "new"
+			render text: "The Requested Coupon Has Expired.", status: 702
+			return
+		end
 		
-        format.html { redirect_to @coupon, notice: 'Coupon Successfully Generated.' }
-        #format.json { render json: @coupon.to_a.to_json, status: :created, location: @coupon.to_a.to_json }
-		format.json { render :json => "Coupon Successfully Generated.\n" + @coupon.to_a.to_json, :status => 700, location: @coupon }
-      else
-        format.html { render action: "new" }
-        #format.json { render json: @coupon.to_a.to_json.errors, status: :unprocessable_entity }
-		format.json { render :json => "Coupon Not Generated.\n", status: 703}
-      end
-    end
+		@coupon.update_attributes(:created_at => Time.now);
+		@coupon.update_attributes(:used_date => nil);
+		
+		@available_coupons = @coupon_type.available_coupons
+		
+		respond_to do |format|
+		  if @coupon.save
+			@coupon_type.update_attributes(:available_coupons => @available_coupons - 1);
+			
+			format.html { redirect_to @coupon, notice: 'Coupon Successfully Generated.' }
+			#format.json { render json: @coupon.to_a.to_json, status: :created, location: @coupon.to_a.to_json }
+			format.json { render :json => "Coupon Successfully Generated.\n" + @coupon.to_a.to_json, :status => 700, location: @coupon }
+		  else
+			format.html { render action: "new" }
+			#format.json { render json: @coupon.to_a.to_json.errors, status: :unprocessable_entity }
+			format.json { render :json => "Coupon Not Generated.\n", status: 703}
+		  end
+		end
+	end
+	
   end
   
 
