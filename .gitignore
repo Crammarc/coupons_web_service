@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> e99a3dd163a7b46f94b44b674b20ad535814aadb
 .bundle
 db/*.sqlite3
 log/*.log
@@ -7,3 +11,24 @@ config/database.yml
 *.swp
 .rvmrc
 
+<<<<<<< HEAD
+=======
+=======
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+/db/*.sqlite3
+/public/system/*
+/coverage/
+/spec/tmp/*
+**.orig
+rerun.txt
+pickle-email-*.html
+>>>>>>> 3abea7db12f08b0d0417643fc9d7dd21b4159745
+>>>>>>> e99a3dd163a7b46f94b44b674b20ad535814aadb
