@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/**/*
+config/database.yml
+*.DS_Store
+*.swp
+.rvmrc
+
+=======
 *.rbc
 *.sassc
 .sass-cache
@@ -14,3 +25,4 @@ capybara-*.html
 **.orig
 rerun.txt
 pickle-email-*.html
+>>>>>>> 3abea7db12f08b0d0417643fc9d7dd21b4159745
